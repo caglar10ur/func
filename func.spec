@@ -53,7 +53,9 @@ rm -fr $RPM_BUILD_ROOT
 %files
 %defattr(-, root, root, -)
 %if "%{python_version}" >= "2.5"
+%if 0%{?fedora} >= 9
 %{python_sitelib}/func*.egg-info
+%endif
 %endif
 %{_bindir}/funcd
 %{_bindir}/func
