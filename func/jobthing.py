@@ -191,7 +191,9 @@ def minion_async_run(retriever, method, args,minion_query=None):
         return job_id
     else:
         # daemonize!
-        os.umask(077)
+        # modified by caglar
+        #os.umask(077)
+        os.umask(0022)
         os.chdir('/')
         os.setsid()
         if os.fork():
