@@ -58,10 +58,117 @@ class SliceTagManager(func_module.FuncModule):
             vserver_instance = vserver.VServer(slice)
         except vserver.NoSuchVServer:
             return False
-    
+
+        if tag == "vsys":
+            vsys_conf = vsys_acl = None 
+
+            l = self.__readFromFile__("/etc/vsys.conf")
+            vsys_conf = "/vservers/%(name)s/vsys %(name)s\n" % {"name": slice}
+            if not l.__contains__(vsys_conf):
+                logger.log("vsys: Adding %s slice to /etc/vsys.conf" % slice)
+                l.append([vsys_conf])
+                self.__writeToFile__("/etc/vsys.conf",  l)
+
+            try:
+                os.mkdir("/vservers/%s/vsys" % slice)
+            except OSError:
+                pass
+
+            l = self.__readFromFile__("/vsys/%s.acl" % value)
+            vsys_acl = "%s\n" % slice  
+            if not l.__contains__(vsys_acl)
+                logger.log("vsys: Adding %s slice to  /vsys/%s.acl file" % (slice, value))
+                l.append([vsys_acl])
+                self.__writeToFile__("/vsys/%s.acl" % value, l)
+
+            if vsys_conf != None or vsys_acl != None:
+                logger.log("vsys: Restarting vsys service")
+                logger.log_call("/etc/init.d/vsys", "restart")
+
     def DeleteSliceTag(self, slice, tag, value):
          # Sanity check
         try:
             vserver_instance = vserver.VServer(slice)
         except vserver.NoSuchVServer:
             return False
+
+        if tag == "vsys":
+            vsys_conf = vsys_acl = None 
+
+            l = self.__readFromFile__("/etc/vsys.conf")
+            vsys_conf = "/vservers/%(name)s/vsys %(name)s\n" % {"name": slice}
+            if l.__contains__(vsys_conf):
+                logger.log("vsys: Adding %s slice to /etc/vsys.conf" % slice)
+                l.remove([vsys_conf])
+                self.__writeToFile__("/etc/vsys.conf",  l)
+
+            try:
+                os.mkdir("/vservers/%s/vsys" % slice)
+            except OSError:
+                pass
+
+            l = self.__readFromFile__("/vsys/%s.acl" % value)
+            vsys_acl = "%s\n" % slice  
+            if l.__contains__(vsys_acl)
+                logger.log("vsys: Adding %s slice to  /vsys/%s.acl file" % (slice, value))
+                l.remove([vsys_acl])
+                self.__writeToFile__("/vsys/%s.acl" % value, l)
+
+            if vsys_conf != None or vsys_acl != None:
+                logger.log("vsys: Restarting vsys service")
+                logger.log_call("/etc/init.d/vsys", "restart")
+
+    def register_method_args(self):
+        return{
+                "AddSliceTag":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "tag":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag name"
+                        },
+                        "value":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag value"
+                        },
+                    },
+                    "description": "AddSliceTag"
+                },
+                "DeleteSliceTag":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "tag":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag name"
+                        },
+                        "value":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag value"
+                        },
+                    },
+                    "description": "DeletSliceTag"
+                },
+            }
+
