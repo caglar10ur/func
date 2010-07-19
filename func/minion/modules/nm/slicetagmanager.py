@@ -297,7 +297,6 @@ class SliceTagManager():
             logger.log("vsys_privs: Removing %s/%s/%s" % (VSYS_PRIV_DIR, slice, tag))
 
             l = self.__readFromFile__("%s/%s/%s" % (VSYS_PRIV_DIR, slice, tag))
-            l.append(["%s\n" % value])
             if l.__contains__("%s\n" % value):
                 l.remove("%s\n" % value)
 
