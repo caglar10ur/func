@@ -14,10 +14,6 @@ import logger
 
 class PersonManager():
 
-    version = "0.0.1"
-    api_version = "0.0.1"
-    description = "PersonManager"
-
     def AddPersonToSlice(self, slice, persons):
         # get the unix account info
         gid = grp.getgrnam("slices")[2]

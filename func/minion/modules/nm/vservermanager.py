@@ -21,12 +21,25 @@ import slicetagmanager
 
 class VServerManager():
 
-    version = "0.0.1"
-    api_version = "0.0.1"
-    description = "VServer"
+    def __startSlice__(self, slice):
+        logger.log("slicemanager: %s: starting" % slice)
+        q = vserver.VServer(slice)
+        q.start()
+        logger.log("slicemanager: %s: started" % slice)
+        return True
+
+    def __stopSlice__(self, slice):
+        logger.log("slicemanager: %s: stoping" % slice)
+        q = vserver.VServer(slice)
+        q.stop()
+        logger.log("slicemanager: %s: stoped" % slice)
+        return True
 
     def AddSliceToNode(self, slice, tags, keys):
         pass
 
     def DeleteSliceFromNode(self, slice):
-        pass
+        logger.log_call("/bin/bash", "-x", "/usr/sbin/vuserdel", slice)
+        return True
+
+
