@@ -31,11 +31,11 @@ class NM(func_module.FuncModule):
 
     def DeleteSliceTag(self, slice, tag, value):
         nm = SliceTagManager()
-        return nm.DeleteSliceTag(self, slice, tag, value)
+        return nm.DeleteSliceTag(slice, tag, value)
 
     def AddPersonToSlice(self, slice, persons):
         nm = PersonManager()
-        return nm.AddPersonToSlice(self, slice, persons)
+        return nm.AddPersonToSlice(slice, persons)
 
     def register_method_args(self):
         return{
