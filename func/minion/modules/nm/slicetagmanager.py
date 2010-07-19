@@ -272,7 +272,7 @@ class SliceTagManager():
             l = self.__readFromFile__("/etc/vsys.conf")
             vsys_conf = "/vservers/%(name)s/vsys %(name)s\n" % {"name": slice}
             if l.__contains__(vsys_conf):
-                l.remove([vsys_conf])
+                l.remove(vsys_conf)
             self.__writeToFile__("/etc/vsys.conf",  l)
 
             try:
@@ -285,7 +285,7 @@ class SliceTagManager():
             l = self.__readFromFile__("/vsys/%s.acl" % value)
             vsys_acl = "%s\n" % slice  
             if l.__contains__(vsys_acl):
-                l.remove([vsys_acl])
+                l.remove(vsys_acl)
             self.__writeToFile__("/vsys/%s.acl" % value, l)
             
             logger.log("vsys: Restarting vsys service")
