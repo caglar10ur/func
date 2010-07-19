@@ -18,10 +18,10 @@ class NM(func_module.FuncModule):
     description = "NodeManager"
 
     def AddSliceToNode(self, slice, tags, keys):
-        VServerManager.AddSliceToNode (self, slice, tags, keys)
+        VServerManager.AddSliceToNode(self, slice, tags, keys)
    
     def DeleteSliceFromNode(self, slice):
-        VServerManager.DeleteSlice(self, slice)
+        VServerManager.DeleteSliceFromNode(self, slice)
 
     def AddSliceTag(self, slice, tag, value):
         SliceTagManager.AddSliceTag(self, slice, tag, value)
