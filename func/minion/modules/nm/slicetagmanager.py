@@ -62,7 +62,7 @@ class SliceTagManager():
 
             l = self.__readFromFile__("/etc/vsys.conf")
             vsys_conf = "/vservers/%(name)s/vsys %(name)s\n" % {"name": slice}
-            l.append([vsys_conf])
+            l += [vsys_conf]
             self.__writeToFile__("/etc/vsys.conf",  l)
 
             try:
@@ -74,7 +74,7 @@ class SliceTagManager():
 
             l = self.__readFromFile__("/vsys/%s.acl" % value)
             vsys_acl = "%s\n" % slice  
-            l.append([vsys_acl])
+            l += [vsys_acl]
             self.__writeToFile__("/vsys/%s.acl" % value, l)
 
             logger.log("vsys: Restarting vsys service")
@@ -89,7 +89,7 @@ class SliceTagManager():
                 os.mkdir("%s/%s" % (VSYS_PRIV_DIR, slice))
 
             l = self.__readFromFile__("%s/%s/%s" % (VSYS_PRIV_DIR, slice, tag))
-            l.append(["%s\n" % value])
+            l += ["%s\n" % value]
             self.__writeToFile__("%s/%s/%s" % (VSYS_PRIV_DIR, slice, tag),  l)
 
             logger.log("vsys_privs: Added vsys attribute %s for %s" % (value, slice))
@@ -109,7 +109,7 @@ class SliceTagManager():
             params = {'host': parts[0], 'port': parts[1], 'ip': ip}
 
             l = self.__readFromFile__("/etc/codemux/codemux.conf")
-            l.append(["%s %s %s %s\n" % (params["host"], slice, params["port"], params["ip"])])
+            l += ["%s %s %s %s\n" % (params["host"], slice, params["port"], params["ip"])]
             self.__writeToFile__("/etc/codemux/codemux.conf",  l)
 
             logger.log("codemux: Restarting codemux service")
