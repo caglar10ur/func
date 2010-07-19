@@ -5,8 +5,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-from func.minion.modules import func_module
-
 import os
 import sys
 
@@ -21,7 +19,7 @@ import tools
 import personmanager
 import slicetagmanager
 
-class VServerManager(func_module.FuncModule):
+class VServerManager():
 
     version = "0.0.1"
     api_version = "0.0.1"

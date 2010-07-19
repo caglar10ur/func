@@ -5,8 +5,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-from func.minion.modules import func_module
-
 import fcntl
 import os
 import pwd, grp
@@ -20,7 +18,7 @@ import logger
 import vserver
 import bwlimit
 
-class SliceTagManager(func_module.FuncModule):
+class SliceTagManager():
 
     version = "0.0.1"
     api_version = "0.0.1"
@@ -117,58 +115,3 @@ class SliceTagManager(func_module.FuncModule):
             if vsys_conf != None or vsys_acl != None:
                 logger.log("vsys: Restarting vsys service")
                 logger.log_call("/etc/init.d/vsys", "restart")
-
-    def register_method_args(self):
-        return{
-                "AddSliceTag":
-                {
-                    "args":
-                    {
-                        "slice":
-                        {
-                            "type":"string",
-                            "optional":False,
-                            "description":"slice name"
-                        },
-                        "tag":
-                        {
-                            "type":"string",
-                            "optional":False,
-                            "description":"tag name"
-                        },
-                        "value":
-                        {
-                            "type":"string",
-                            "optional":False,
-                            "description":"tag value"
-                        },
-                    },
-                    "description": "AddSliceTag"
-                },
-                "DeleteSliceTag":
-                {
-                    "args":
-                    {
-                        "slice":
-                        {
-                            "type":"string",
-                            "optional":False,
-                            "description":"slice name"
-                        },
-                        "tag":
-                        {
-                            "type":"string",
-                            "optional":False,
-                            "description":"tag name"
-                        },
-                        "value":
-                        {
-                            "type":"string",
-                            "optional":False,
-                            "description":"tag value"
-                        },
-                    },
-                    "description": "DeletSliceTag"
-                },
-            }
-

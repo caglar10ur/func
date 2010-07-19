@@ -18,16 +18,134 @@ class NM(func_module.FuncModule):
     description = "NodeManager"
 
     def AddSliceToNode(self, slice, tags, keys):
-        VServerManager.AddSliceToNode(self, slice, tags, keys)
+        nm = VServerManager()
+        return nm.AddSliceToNode(slice, tags, keys)
    
     def DeleteSliceFromNode(self, slice):
-        VServerManager.DeleteSliceFromNode(self, slice)
+        nm = VServerManager()
+        return nm.DeleteSliceFromNode(slice)
 
     def AddSliceTag(self, slice, tag, value):
-        SliceTagManager.AddSliceTag(self, slice, tag, value)
+        nm = SliceTagManager()
+        return nm.AddSliceTag(slice, tag, value)
 
     def DeleteSliceTag(self, slice, tag, value):
-        SliceTagManager.DeleteSliceTag(self, slice, tag, value)
+        nm = SliceTagManager()
+        return nm.DeleteSliceTag(self, slice, tag, value)
 
     def AddPersonToSlice(self, slice, persons):
-        PersonManager.AddPersonToSlice(self, slice, persons)
+        nm = PersonManager()
+        return nm.AddPersonToSlice(self, slice, persons)
+
+    def register_method_args(self):
+        return{
+                "AddSliceToNode":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "tags":
+                        {
+                            "type":"list",
+                            "optional":False,
+                            "description":"tags"
+                        },
+                        "keys":
+                        {
+                            "type":"list",
+                            "optional":False,
+                            "description":"keys"
+                        },
+                    },
+                    "description": "AddSliceToNode"
+                },
+                "DeleteSliceFromNode":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                    },
+                    "description": "DeleteSliceFromNode"
+                },
+
+
+                "AddSliceTag":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "tag":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag name"
+                        },
+                        "value":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag value"
+                        },
+                    },
+                    "description": "AddSliceTag"
+                },
+                "DeleteSliceTag":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "tag":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag name"
+                        },
+                        "value":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"tag value"
+                        },
+                    },
+                    "description": "DeletSliceTag"
+                },
+                "AddPersonToSlice":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "persons":
+                        {
+                            "type":"list",
+                            "optional":False,
+                            "description":"person keys name"
+                        },
+                    },
+                    "description": "AddPersonToSlice"
+                },
+            }
