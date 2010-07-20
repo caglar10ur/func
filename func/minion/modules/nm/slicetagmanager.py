@@ -20,6 +20,8 @@ import bwlimit
 
 class SliceTagManager():
 
+#FIXME: default values  
+
     def __readFromFile__(self, filename):
         if os.path.exists(filename):
             f = open(filename, "r")

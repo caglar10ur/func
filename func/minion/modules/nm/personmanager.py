@@ -44,4 +44,5 @@ class PersonManager():
         os.chown(auth_keys, uid, gid)
 
         logger.log("accounts: %s: installed ssh keys" % slice)
-
+        
+        return True
