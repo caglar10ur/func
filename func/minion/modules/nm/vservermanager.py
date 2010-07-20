@@ -40,6 +40,8 @@ class VServerManager():
         try:
             vserver_instance = vserver.VServer(slice)
         except vserver.NoSuchVServer:
+            pass
+        else:
             logger.log("slicemanager: %s: Slice already exists" % slice)
             return False
 
