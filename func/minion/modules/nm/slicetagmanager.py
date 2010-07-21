@@ -20,7 +20,7 @@ import bwlimit
 
 class SliceTagManager():
 
-#FIXME: default values  
+#FIXME: default values
 
     def __readFromFile__(self, filename):
         if os.path.exists(filename):
@@ -71,7 +71,7 @@ class SliceTagManager():
             logger.log("vsys: Adding %s slice to /vsys/%s.acl file" % (slice, value))
 
             l = self.__readFromFile__("/vsys/%s.acl" % value)
-            vsys_acl = "%s\n" % slice  
+            vsys_acl = "%s\n" % slice
             l += [vsys_acl]
             self.__writeToFile__("/vsys/%s.acl" % value, l)
 
@@ -137,15 +137,15 @@ class SliceTagManager():
             logger.log("ip_addresses: Updating %s slice with ip_addresses value %s" % (slice, value))
 
             for ip in value.split(","):
-                 if len(ip.split(".")) == 4:
-                     try:
-                         socket.inet_aton(ip)
-                     except socket.error:
-                         logger.log("ip_addresses: Attribute value (%s) for ip_addresses is not a valid IP. Skipping." % ip)
-                         return False
-                 else:
-                     logger.log("codemux: Attribute value (%s) for ip_addresses not separated by dot. Skipping." % ip)
-                     return False
+                if len(ip.split(".")) == 4:
+                    try:
+                        socket.inet_aton(ip)
+                    except socket.error:
+                        logger.log("ip_addresses: Attribute value (%s) for ip_addresses is not a valid IP. Skipping." % ip)
+                        return False
+                else:
+                    logger.log("codemux: Attribute value (%s) for ip_addresses not separated by dot. Skipping." % ip)
+                    return False
 
             vserver_instance.set_ipaddresses_config(value)
 
@@ -170,8 +170,8 @@ class SliceTagManager():
             logger.log("enabled: Updating %s slice with enabled value %s" % (slice, value))
 
             if int(value) > 0:
-                 # FIXME: SLICE ID
-                 vserver_instance.start()
+                # FIXME: SLICE ID
+                vserver_instance.start()
             else:
                 logger.log("enabled: disabling remote login for %s" % slice)
                 # FIXME: suspend is not supported with cgroups!
@@ -260,7 +260,7 @@ class SliceTagManager():
 
         #FIXME: sliverauth
         #FIXME: reservation
-        
+
         #FIXME: hacky solutions
         if tag == "omf_control":
             pass
@@ -295,11 +295,11 @@ class SliceTagManager():
             logger.log("vsys: Removing %s slice from /vsys/%s.acl file" % (slice, value))
 
             l = self.__readFromFile__("/vsys/%s.acl" % value)
-            vsys_acl = "%s\n" % slice  
+            vsys_acl = "%s\n" % slice
             if l.__contains__(vsys_acl):
                 l.remove(vsys_acl)
             self.__writeToFile__("/vsys/%s.acl" % value, l)
-            
+
             logger.log("vsys: Restarting vsys service")
             logger.log_call("/etc/init.d/vsys", "restart")
 

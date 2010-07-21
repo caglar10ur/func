@@ -102,5 +102,3 @@ class VServerManager():
     def DeleteSliceFromNode(self, slice):
         logger.log_call("/bin/bash", "-x", "/usr/sbin/vuserdel", slice)
         return True
-
-

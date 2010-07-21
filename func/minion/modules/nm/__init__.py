@@ -4,7 +4,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- 
+
 from func.minion.modules import func_module
 
 from slicetagmanager import SliceTagManager
@@ -20,7 +20,7 @@ class NM(func_module.FuncModule):
     def AddSliceToNode(self, slice, tags, keys):
         nm = VServerManager()
         return nm.AddSliceToNode(slice, tags, keys)
-   
+
     def DeleteSliceFromNode(self, slice):
         nm = VServerManager()
         return nm.DeleteSliceFromNode(slice)
