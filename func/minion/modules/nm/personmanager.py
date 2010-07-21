@@ -19,23 +19,23 @@ class PersonManager():
         gid = grp.getgrnam("slices")[2]
         pw_info = pwd.getpwnam(slice)
         uid = pw_info[2]
-        pw_dir = pw_info[5]
+        home_dir = pw_info[5]
 
         # write out authorized_keys file and conditionally create
         # the .ssh subdir if need be.
-        dot_ssh = os.path.join(pw_dir,".ssh")
+        dot_ssh = os.path.join(home_dir, ".ssh")
         if not os.path.isdir(dot_ssh):
-            if not os.path.isdir(pw_dir):
-                logger.verbose("accounts: WARNING: homedir %s does not exist for %s!" % (pw_dir,slice))
-                os.mkdir(pw_dir)
-                os.chown(pw_dir, uid, gid)
+            if not os.path.isdir(home_dir):
+                logger.verbose("accounts: WARNING: homedir %s does not exist for %s!" % (home_dir, slice))
+                os.mkdir(home_dir)
+                os.chown(home_dir, uid, gid)
             os.mkdir(dot_ssh)
 
         auth_keys = os.path.join(dot_ssh, "authorized_keys")
         f = open(auth_keys, "w")
-        for i in persons:
-            if i["key_type"] == "ssh":
-                f.write("%s\n" % i["key"])
+        for person in persons:
+            if person["key_type"] == "ssh":
+                f.write("%s\n" % person["key"])
         f.close()
 
         # set access permissions and ownership properly
