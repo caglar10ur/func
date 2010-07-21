@@ -254,6 +254,20 @@ class SliceTagManager():
             # Not Used
             #             logger.log("bwmon: Updating %s: Net i2 Share = %s" %(self.name, self.i2Share))
 
+        # Not used
+        if tag == "rawdisk":
+            pass
+
+        #FIXME: sliverauth
+        #FIXME: reservation
+        
+        #FIXME: hacky solutions
+        if tag == "omf_control":
+            pass
+
+        if tag == "drl":
+            pass
+
         return True
 
 

@@ -38,7 +38,7 @@ class NM(func_module.FuncModule):
         return nm.AddPersonToSlice(slice, persons)
 
     def register_method_args(self):
-        return{
+        return {
                 "AddSliceToNode":
                 {
                     "args":

@@ -34,7 +34,8 @@ class PersonManager():
         auth_keys = os.path.join(dot_ssh, "authorized_keys")
         f = open(auth_keys, "w")
         for i in persons:
-            f.write("%s\n" % i["key"])
+            if i["key_type"] == "ssh":
+                f.write("%s\n" % i["key"])
         f.close()
 
         # set access permissions and ownership properly
