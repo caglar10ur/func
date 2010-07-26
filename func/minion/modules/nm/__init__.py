@@ -11,32 +11,51 @@ from slicetagmanager import SliceTagManager
 from vservermanager import VServerManager
 from personmanager import PersonManager
 
+def check_revision(function_name):
+    def _wrapper(*args, **kwargs):
+        # FIXME: args[X] will be a revision number in future
+        # if our-revision != API-revision --> out-of-sync
+        if True:
+            return function_name(*args, **kwargs)
+        else:
+            import logger
+            logger.log("Out-of-sync!...")
+            return False
+    return _wrapper
+
+
 class NM(func_module.FuncModule):
 
     version = "0.0.1"
     api_version = "0.0.1"
     description = "NodeManager"
 
+    @check_revision
     def AddSliceToNode(self, slice, tags, keys):
         nm = VServerManager()
         return nm.AddSliceToNode(slice, tags, keys)
 
+    @check_revision
     def DeleteSliceFromNode(self, slice):
         nm = VServerManager()
         return nm.DeleteSliceFromNode(slice)
 
+    @check_revision
     def AddSliceTag(self, slice, tag, value):
         nm = SliceTagManager()
         return nm.AddSliceTag(slice, tag, value)
 
+    @check_revision
     def DeleteSliceTag(self, slice, tag, value):
         nm = SliceTagManager()
         return nm.DeleteSliceTag(slice, tag, value)
 
+    @check_revision
     def AddPersonToSlice(self, slice, persons):
         nm = PersonManager()
         return nm.AddPersonToSlice(slice, persons)
 
+    @check_revision
     def DeletePersonFromSlice(self, slice, persons):
         nm = PersonManager()
         # Adds all keys to slice
