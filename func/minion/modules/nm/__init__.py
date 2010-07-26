@@ -37,6 +37,11 @@ class NM(func_module.FuncModule):
         nm = PersonManager()
         return nm.AddPersonToSlice(slice, persons)
 
+    def DeletePersonFromSlice(self, slice, persons):
+        nm = PersonManager()
+        # Adds all keys to slice
+        return nm.AddPersonToSlice(slice, persons)
+
     def register_method_args(self):
         return {
                 "AddSliceToNode":
@@ -147,5 +152,24 @@ class NM(func_module.FuncModule):
                         },
                     },
                     "description": "AddPersonToSlice"
+                },
+                "DeletePersonFromSlice":
+                {
+                    "args":
+                    {
+                        "slice":
+                        {
+                            "type":"string",
+                            "optional":False,
+                            "description":"slice name"
+                        },
+                        "persons":
+                        {
+                            "type":"list",
+                            "optional":False,
+                            "description":"person keys name"
+                        },
+                    },
+                    "description": "DeletePersonFromSlice"
                 },
             }
