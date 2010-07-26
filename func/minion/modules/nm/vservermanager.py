@@ -94,7 +94,7 @@ class VServerManager():
 
             bwlimit.set(bwlimit.get_xid(slice))
 
-            self.StartSlice(slice)
+            self.__startSlice__(slice)
         else:
             return False
         return True
