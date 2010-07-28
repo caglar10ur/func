@@ -11,16 +11,24 @@ from slicetagmanager import SliceTagManager
 from vservermanager import VServerManager
 from personmanager import PersonManager
 
-def check_revision(function_name):
+import os
+
+def increment_revision_for_node(function_name):
     def _wrapper(*args, **kwargs):
-        # FIXME: args[X] will be a revision number in future
-        # if our-revision != API-revision --> out-of-sync
-        if True:
-            return function_name(*args, **kwargs)
-        else:
-            import logger
-            logger.log("Out-of-sync!...")
-            return False
+        filename = "/var/lib/func/revision"
+        value = 0
+
+        if os.path.exists(filename):
+            f = open(filename, "r")
+            value = int(f.read().strip())
+            f.close()
+
+        f = open(filename, "w")
+        value += 1
+        f.write("%d" % int(value))
+        f.close()
+
+        return function_name(*args, **kwargs)
     return _wrapper
 
 
@@ -30,32 +38,32 @@ class NM(func_module.FuncModule):
     api_version = "0.0.1"
     description = "NodeManager"
 
-    @check_revision
+    @increment_revision_for_node
     def AddSliceToNode(self, slice, tags, keys):
         nm = VServerManager()
         return nm.AddSliceToNode(slice, tags, keys)
 
-    @check_revision
+    @increment_revision_for_node
     def DeleteSliceFromNode(self, slice):
         nm = VServerManager()
         return nm.DeleteSliceFromNode(slice)
 
-    @check_revision
+    @increment_revision_for_node
     def AddSliceTag(self, slice, tag, value):
         nm = SliceTagManager()
         return nm.AddSliceTag(slice, tag, value)
 
-    @check_revision
+    @increment_revision_for_node
     def DeleteSliceTag(self, slice, tag, value):
         nm = SliceTagManager()
         return nm.DeleteSliceTag(slice, tag, value)
 
-    @check_revision
+    @increment_revision_for_node
     def AddPersonToSlice(self, slice, persons):
         nm = PersonManager()
         return nm.AddPersonToSlice(slice, persons)
 
-    @check_revision
+    @increment_revision_for_node
     def DeletePersonFromSlice(self, slice, persons):
         nm = PersonManager()
         # Adds all keys to slice
