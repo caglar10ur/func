@@ -20,7 +20,10 @@ def increment_revision_for_node(function_name):
 
         if os.path.exists(filename):
             f = open(filename, "r")
-            value = int(f.read().strip())
+            try:
+                value = int(f.read().strip())
+            except ValueError:
+                pass
             f.close()
 
         f = open(filename, "w")
