@@ -28,6 +28,11 @@ def increment_revision_for_node(function_name):
         f.write("%d" % int(value))
         f.close()
 
+        log = open("/var/log/func_nm.log", "a")
+        log.write("Revision: %s Operation: %s Args: %s Kwargs: %s\n" % (value, function_name.__name__, args, kwargs))
+        log.flush()
+        log.close()
+
         return function_name(*args, **kwargs)
     return _wrapper
 
