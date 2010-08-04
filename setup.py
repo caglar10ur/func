@@ -12,7 +12,6 @@ A small pluggable xml-rpc daemon used by %s to implement various web services ho
 
 
 if __name__ == "__main__":
-
     manpath    = "share/man/man1/"
     etcpath    = "/etc/%s" % NAME
     etcmodpath = "/etc/%s/modules" % NAME
@@ -62,7 +61,8 @@ if __name__ == "__main__":
                         # this will work.
                         "%s/minion/modules.netapp" % NAME,
                         "%s/minion/modules.netapp.vol" % NAME,
-                        "%s/minion/modules.iptables" % NAME
+                        "%s/minion/modules.iptables" % NAME,
+                        "%s/minion/modules.nm" % NAME
             ],
             data_files = [(initpath, ["init-scripts/funcd"]),
                           (etcpath,  ["etc/minion.conf",
