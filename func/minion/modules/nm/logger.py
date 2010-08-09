@@ -6,7 +6,7 @@ import traceback
 import subprocess
 import select
 
-LOG_FILE    = '/var/log/nodemanager'
+LOG_FILE    = '/var/log/nodemanager.func'
 
 # basically define 3 levels
 LOG_NONE=0
