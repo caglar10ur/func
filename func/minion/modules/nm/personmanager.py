@@ -9,8 +9,8 @@ import os
 import sys
 import pwd, grp
 
-sys.path.append("/usr/share/NodeManager/")
 import logger
+
 
 class PersonManager():
 

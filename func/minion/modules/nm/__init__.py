@@ -13,6 +13,7 @@ from personmanager import PersonManager
 
 import os
 
+
 def increment_revision_for_node(function_name):
     def _wrapper(*args, **kwargs):
         filename = "/var/lib/func/revision"

@@ -8,16 +8,16 @@
 import os
 import sys
 
-sys.path.append("/usr/share/NodeManager/")
-
 import vserver
-import bwlimit
-
 import logger
-import tools
 
 import personmanager
 import slicetagmanager
+
+sys.path.append("/usr/share/NodeManager/")
+import tools
+import bwlimit
+
 
 class VServerManager():
 

@@ -12,11 +12,12 @@ import shutil
 import socket
 import sys
 
-sys.path.append("/usr/share/NodeManager/")
-
 import logger
 import vserver
+
+sys.path.append("/usr/share/NodeManager/")
 import bwlimit
+
 
 class SliceTagManager():
 
