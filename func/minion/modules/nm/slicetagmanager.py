@@ -77,7 +77,7 @@ class SliceTagManager():
             self.__writeToFile__("/vsys/%s.acl" % value, l)
 
             logger.log("vsys: Restarting vsys service")
-            logger.log_call("/etc/init.d/vsys", "restart")
+            logger.log_call(["/etc/init.d/vsys", "restart"])
 
         if tag.startswith("vsys_"):
             VSYS_PRIV_DIR = "/etc/planetlab/vsys-attributes"
@@ -112,7 +112,7 @@ class SliceTagManager():
             self.__writeToFile__("/etc/codemux/codemux.conf",  l)
 
             logger.log("codemux: Restarting codemux service")
-            logger.log_call("/etc/init.d/codemux","condrestart")
+            logger.log_call(["/etc/init.d/codemux","condrestart"])
 
         if tag == "cpu_share":
             logger.log("cpu_share: Updating %s slice with cpu_share value %s" % (slice, value))
@@ -302,7 +302,7 @@ class SliceTagManager():
             self.__writeToFile__("/vsys/%s.acl" % value, l)
 
             logger.log("vsys: Restarting vsys service")
-            logger.log_call("/etc/init.d/vsys", "restart")
+            logger.log_call(["/etc/init.d/vsys", "restart"])
 
         if tag.startswith("vsys_"):
             VSYS_PRIV_DIR = "/etc/planetlab/vsys-attributes"
@@ -340,7 +340,7 @@ class SliceTagManager():
             self.__writeToFile__("/etc/codemux/codemux.conf",  l)
 
             logger.log("vsys: Restarting codemux service")
-            logger.log_call("/etc/init.d/codemux","condrestart")
+            logger.log_call(["/etc/init.d/codemux","condrestart"])
 
         if tag == "cpu_share":
             logger.log("cpu_share: Removing cpu_share value %s from %s slice" % (value, slice))

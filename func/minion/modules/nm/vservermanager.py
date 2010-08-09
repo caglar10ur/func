@@ -68,7 +68,7 @@ class VServerManager():
             return personality
 
         logger.log("slicemanager: %s: creating" % slice)
-        logger.log_call("/bin/bash","-x","/usr/sbin/vuseradd", "-t", vref, slice)
+        logger.log_call(["/bin/bash","-x","/usr/sbin/vuseradd", "-t", vref, slice])
         logger.log("slicemanager: %s: created" % slice)
 
         # export slicename to the slice in /etc/slicename
@@ -100,5 +100,5 @@ class VServerManager():
         return True
 
     def DeleteSliceFromNode(self, slice):
-        logger.log_call("/bin/bash", "-x", "/usr/sbin/vuserdel", slice)
+        logger.log_call(["/bin/bash", "-x", "/usr/sbin/vuserdel", slice])
         return True
