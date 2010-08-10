@@ -153,6 +153,8 @@ chmod 600 /var/log/func/audit.log
 # upgrade old installs if needed
 #/usr/bin/update-func
 
+service funcd restart
+
 exit 0
 
 %preun
