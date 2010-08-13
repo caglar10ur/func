@@ -17,6 +17,7 @@ Requires: certmaster >= 0.28
 Requires: logrotate
 Requires: smolt
 BuildRequires: python-devel
+Requires: hal
 %if %is_suse
 BuildRequires: gettext-devel
 %else
