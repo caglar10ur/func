@@ -154,8 +154,13 @@ chmod 600 /var/log/func/audit.log
 # upgrade old installs if needed
 #/usr/bin/update-func
 
-service funcd restart
+######################
+# write hostname to minion_name
+sed -i -e "s:minion_name =:minion_name = `hostname`:g" /etc/func/minion.conf
 
+# restart daemon
+service funcd restart
+######################
 exit 0
 
 %preun
