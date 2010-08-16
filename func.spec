@@ -158,8 +158,10 @@ chmod 600 /var/log/func/audit.log
 # write hostname to minion_name
 sed -i -e "s:minion_name =\(.*\):minion_name = `hostname`:g" /etc/func/minion.conf
 
-# restart daemon
-service funcd restart
+if [ "$PL_BOOTCD" != "1" ] ; then
+     # restart daemon
+     service funcd restart
+fi
 ######################
 exit 0
 
