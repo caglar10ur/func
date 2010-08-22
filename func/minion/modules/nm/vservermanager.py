@@ -90,7 +90,7 @@ class VServerManager():
 
             s = slicetagmanager.SliceTagManager()
             for tag in tags:
-                s.AddSliceTag(slice, tag)
+                s.AddSliceTag(slice, tag["tagname"], tag["value"])
 
             bwlimit.set(bwlimit.get_xid(slice))
 
