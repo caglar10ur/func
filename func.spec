@@ -163,6 +163,25 @@ if [ "$PL_BOOTCD" != "1" ] ; then
      service funcd restart
 fi
 ######################
+
+######################
+# set ACL for apache
+setfacl -d -R -m 'u:apache:rX' /etc/pki/certmaster/
+setfacl -R -m 'u:apache:rX' /etc/pki/certmaster/
+setfacl -d -R -m 'u:apache:rX' /var/lib/certmaster
+setfacl -R -m 'u:apache:rX' /var/lib/certmaster
+setfacl -d -R -m 'u:apache:rX' /var/lib/certmaster/certmaster
+setfacl -R -m 'u:apache:rX' /var/lib/certmaster/certmaster
+setfacl -d -R -m 'u:apache:rX' /var/lib/certmaster/certmaster/certs
+setfacl -R -m 'u:apache:rX' /var/lib/certmaster/certmaster/certs
+setfacl -d -R -m 'u:apache:rX' /var/lib/certmaster/peers
+setfacl -R -m 'u:apache:rX' /var/lib/certmaster/peers
+setfacl -d -R -m 'u:apache:rwX' /var/lib/func
+setfacl -R -m 'u:apache:rwX' /var/lib/func
+setfacl -d -R -m 'u:apache:rwX' /var/log/func/
+setfacl -R -m 'u:apache:rwX' /var/log/func/
+######################
+
 exit 0
 
 %preun
