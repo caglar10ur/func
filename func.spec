@@ -165,7 +165,7 @@ fi
 ######################
 
 ######################
-# set ACL for apache
+# set ACL for apache (requires acl keyword in fstab)
 setfacl -d -R -m 'u:apache:rX' /etc/pki/certmaster/
 setfacl -R -m 'u:apache:rX' /etc/pki/certmaster/
 setfacl -d -R -m 'u:apache:rX' /var/lib/certmaster
