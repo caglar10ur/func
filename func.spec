@@ -156,7 +156,7 @@ chmod 600 /var/log/func/audit.log
 
 ######################
 # write hostname to minion_name
-sed -i -e "s:minion_name =\(.*\):minion_name = `hostname`:g" /etc/func/minion.conf
+sed -i -e "s:minion_name =\(.*\):minion_name = `grep HOSTNAME /etc/sysconfig/network | awk -F'=' '{print $2}'`:g" /etc/func/minion.conf
 
 if [ "$PL_BOOTCD" != "1" ] ; then
      # restart daemon
